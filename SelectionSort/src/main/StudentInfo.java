@@ -1,5 +1,7 @@
 package main;
 
+import java.util.Random;
+
 public class StudentInfo implements Comparable {
 
 	private String name;
@@ -10,11 +12,27 @@ public class StudentInfo implements Comparable {
 	private double hwAvg;
 	
 	public StudentInfo(String nm) {
-		nm=name;
+		name=nm;
 		tests=new double[5];
 		quizzes=new double[8];
 		testCount=0;
 		quizCount=0;
+	}
+	
+	public StudentInfo(String nm,double hwAvg) {
+		name=nm;
+		tests=new double[5];
+		quizzes=new double[8];
+		testCount=0;
+		quizCount=0;
+		addHwAvg(hwAvg);
+		Random r = new Random();
+		for(int i=0;i<5;i++) {
+			addTest(50 + (100 - 50) * r.nextDouble());
+		}
+		for(int i=0;i<8;i++) {
+			addQuiz(50 + (100 - 50) * r.nextDouble());
+		}
 	}
 	
 	public String getName() {
@@ -48,7 +66,7 @@ public class StudentInfo implements Comparable {
 	}
 	
 	public void addHwAvg(double hw) {
-		hw=hwAvg;
+		hwAvg=hw;
 	}
 	
 	public double getHwAvg() {
