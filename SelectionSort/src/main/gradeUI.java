@@ -17,32 +17,61 @@ public class gradeUI extends GBFrame {
 	JMenuItem sortGrade = addMenuItem("Sort","Grade");
 	JMenuItem sortName = addMenuItem("Sort","Name");
 	
-	sorter sort = new sorter();
+	sorter sort;
 	AllStudents students = new AllStudents();
 	
 	JPanel dataLayout = addPanel(1,2,1,1);
 	JTable dataTable = null;
 	DefaultTableModel dataModel = null;
 	
+	JTextArea stats = addTextArea("",2,2,1,1);
+	
 	public gradeUI() {
+		stats.setEditable(false);
 		display();
 	}
 	
 	public void menuItemSelected(JMenuItem menuItem) {
 		if (menuItem == add) {
-			AddDlg dlg = new AddDlg(this);
+			AddDlg dlg = new AddDlg(this,students);
 			dlg.setVisible(true);
 		}
 		if(menuItem == populate) {
 			students.addStudent(new StudentInfo("Matt", 60));
 			students.addStudent(new StudentInfo("Mike", 100));
 			students.addStudent(new StudentInfo("Nate", 80));
+			students.addStudent(new StudentInfo("Noah", 10));
 		}
 		if(menuItem ==sortGrade) {
 			dataModel.setRowCount(0);
+			displayStudents(students.sortGrades());
+			setStats();
+		}
+		if(menuItem ==sortName) {
+			dataModel.setRowCount(0);
 			displayStudents(students.sortNames());
+			setStats();
 		}
 	} 
+	
+	private void setStats() {
+		sort=new sorter();
+		try {
+			for(StudentInfo s: students.sortGrades()) {
+				sort.addNum(String.format("%.2f", s.getFinalAvg()));
+			}
+			
+			String str="";
+			str+=String.format("Mean: %.3f", sort.getMean());
+			str+=String.format("\nMedian: %s", sort.getMedian());
+			str+=String.format("\nMode: %s", sort.getMode());
+			str+=String.format("\nStandard Deviation: %s", sort.getSD());
+			stats.setText(str);
+		}
+		catch(ImproperFormatException e) {
+			
+		}
+	}
 	
 	private void display() {
 		String[] columnNames = {"Name", "Test Avg", "Quiz Avg", "HW Avg", "Final Avg"};

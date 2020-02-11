@@ -14,16 +14,16 @@ public class AllStudents {
 	
 	public ArrayList<StudentInfo> sortNames(){
 		int size=students.size();
-		for(int i=1;i<size-1;i++) {
-			int min=i;
+		for(int i=0;i<size-1;i++) {
+			int index=i;
 			for(int j=i+1;j<size;j++) {
-				if(students.get(j).compareTo(students.get(min))<0) {
-					min=j;
+				if(students.get(j).compareTo(students.get(index))<0) {
+					index=j;
 				}
 			}
-			if(min!=i) {
-				StudentInfo temp=students.get(min);
-				students.set(min, students.get(i));
+			if(index!=i) {
+				StudentInfo temp=students.get(index);
+				students.set(index, students.get(i));
 				students.set(i, temp);
 			}
 		}
@@ -32,16 +32,16 @@ public class AllStudents {
 	
 	public ArrayList<StudentInfo> sortGrades(){
 		int size=students.size();
-		for(int i=1;i<size-1;i++) {
-			int min=i;
+		for(int i=0;i<size-1;i++) {
+			int max=i;
 			for(int j=i+1;j<size;j++) {
-				if(students.get(j).getFinalAvg()<students.get(min).getFinalAvg()) {
-					min=j;
+				if(students.get(j).getFinalAvg()>students.get(max).getFinalAvg()) {
+					max=j;
 				}
 			}
-			if(min!=i) {
-				StudentInfo temp=students.get(min);
-				students.set(min, students.get(i));
+			if(max!=i) {
+				StudentInfo temp=students.get(max);
+				students.set(max, students.get(i));
 				students.set(i, temp);
 			}
 		}

@@ -13,22 +13,18 @@ public class sorter {
 		try {
 			String[] addedNums = str.split(","); // splits inputed numbers by the ,
 			for(String numbers:addedNums) {
-				if(nums.size()>24) {
-					throw new ImproperFormatException("Must be less than 25 numbers");
-				}
 				nums.add(Double.parseDouble(numbers));
 			}
 		}
 		catch(NumberFormatException e) {
-			throw new ImproperFormatException("input must be an integer");
 		}
 		sort();
 	}
 	
 	public String print() {
-		String str=String.format("%d", nums.get(0));
+		String str=String.format("%.2f", nums.get(0));
 		for(int i=1;i<nums.size();i++) {
-			str+=String.format(", %d", nums.get(i));
+			str+=String.format(", %.2f", nums.get(i));
 		}
 		return str;
 	}
@@ -51,9 +47,9 @@ public class sorter {
 	
 	public String getMedian() {
 		if(nums.size()%2!=0) {
-			return String.format("%d", nums.get((nums.size()/2)));
+			return String.format("%.2f", nums.get((nums.size()/2)));
 		}
-		return String.format("%.3f", ((double)nums.get(nums.size()/2)+nums.get((nums.size()/2)-1))/2);
+		return String.format("%.2f", ((double)nums.get(nums.size()/2)+nums.get((nums.size()/2)-1))/2);
 	}
 	
 	public String getMode() {
@@ -82,10 +78,10 @@ public class sorter {
 		String str = "";
 		for(double i : mode) {
 			if(i==mode.get(0)) {
-				str += String.format("%d", i);
+				str += String.format("%.2f", i);
 			}
 			else {
-				str += ", " + String.format("%d", i);
+				str += ", " + String.format("%.2f", i);
 			}
 		}
 		return str;
@@ -103,7 +99,7 @@ public class sorter {
 			total+=i;
 		}
 		
-		return String.format("%.3f", Math.sqrt(total/nums.size()));
+		return String.format("%.2f", Math.sqrt(total/nums.size()));
 	}
 	
 	private void sort(){

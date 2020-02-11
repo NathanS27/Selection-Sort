@@ -1,5 +1,6 @@
 package main;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class StudentInfo implements Comparable {
@@ -17,6 +18,13 @@ public class StudentInfo implements Comparable {
 		quizzes=new double[8];
 		testCount=0;
 		quizCount=0;
+	}
+	
+	public StudentInfo(String n, double[] ts, double[] qs, double hw) {
+		name = n;
+		tests = ts;
+		quizzes = qs;
+		hwAvg = hw;
 	}
 	
 	public StudentInfo(String nm,double hwAvg) {
