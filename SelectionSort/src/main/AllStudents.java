@@ -8,7 +8,10 @@ public class AllStudents {
 	public AllStudents() {
 		
 	}
-	public void addStudent(StudentInfo s) {
+	public void addStudent(StudentInfo s)throws ImproperFormatException {
+		if(students.size()>=15) {
+			throw new ImproperFormatException("Max of 15 Students");
+		}
 		students.add(s);
 	}
 	

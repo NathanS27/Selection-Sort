@@ -20,10 +20,18 @@ public class StudentInfo implements Comparable {
 		quizCount=0;
 	}
 	
-	public StudentInfo(String n, double[] ts, double[] qs, double hw) {
+	public StudentInfo(String n, String ts, String qs, double hw) {
+		tests=new double[5];
+		quizzes=new double[8];
 		name = n;
-		tests = ts;
-		quizzes = qs;
+		String[] tTemp = ts.split(" ");
+		for(String s:tTemp) {
+			addTest(Double.parseDouble(s));
+		}
+		String[] qTemp = qs.split(" ");
+		for(String s:qTemp) {
+			addQuiz(Double.parseDouble(s));
+		}
 		hwAvg = hw;
 	}
 	

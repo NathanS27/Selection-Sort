@@ -35,22 +35,29 @@ public class gradeUI extends GBFrame {
 		if (menuItem == add) {
 			AddDlg dlg = new AddDlg(this,students);
 			dlg.setVisible(true);
+			displayStudents(students.sortGrades());
 		}
 		if(menuItem == populate) {
-			students.addStudent(new StudentInfo("Matt", 60));
-			students.addStudent(new StudentInfo("Mike", 100));
-			students.addStudent(new StudentInfo("Nate", 80));
-			students.addStudent(new StudentInfo("Noah", 10));
+			try {
+				students.addStudent(new StudentInfo("Matt", 60));
+				students.addStudent(new StudentInfo("Mike", 100));
+				students.addStudent(new StudentInfo("Nate", 80));
+				students.addStudent(new StudentInfo("Noah", 10));
+				students.addStudent(new StudentInfo("Robby", 78));
+				students.addStudent(new StudentInfo("Jonathan", 1));
+			}
+			catch(ImproperFormatException e) {
+				//never gets here
+			}
+			displayStudents(students.sortGrades());
 		}
 		if(menuItem ==sortGrade) {
 			dataModel.setRowCount(0);
 			displayStudents(students.sortGrades());
-			setStats();
 		}
 		if(menuItem ==sortName) {
 			dataModel.setRowCount(0);
 			displayStudents(students.sortNames());
-			setStats();
 		}
 	} 
 	
@@ -102,9 +109,11 @@ public class gradeUI extends GBFrame {
 	}
 	
 	private void displayStudents(ArrayList<StudentInfo> list) {
+		dataModel.setRowCount(0);
 		for(StudentInfo s:list) {
 			displayStudent(s);
 		}
+		setStats();
 	}
 	
 	private void displayStudent(StudentInfo stu) {
