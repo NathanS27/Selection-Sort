@@ -2,6 +2,8 @@ package main;
 
 import BreezySwing.*;
 
+import java.awt.Color;
+
 import javax.swing.*;
 
 public class AddDlg extends GBDialog {
@@ -57,6 +59,9 @@ public class AddDlg extends GBDialog {
 				testField.grabFocus();
 				if(numTest==5) {
 					testButton.setVisible(false);
+					testField.disable();;
+					testField.setText("");
+					quizField.grabFocus();
 				}
 			}
 			else {
@@ -85,6 +90,9 @@ public class AddDlg extends GBDialog {
 				quizField.grabFocus();
 				if(numQuiz==8) {
 					quizButton.setVisible(false);
+					quizField.disable();;
+					quizField.setText("");
+					hwField.grabFocus();
 				}
 			}
 			else {
@@ -102,7 +110,7 @@ public class AddDlg extends GBDialog {
 				hwAverage = Double.parseDouble(hwField.getText());
 			}
 			catch(NumberFormatException e) {
-				errorMsg("Must be a double");
+				errorMsg("Homework average must be a double");
 				hwField.setText("");
 				hwField.grabFocus();
 				return;
@@ -124,6 +132,9 @@ public class AddDlg extends GBDialog {
 				}
 				this.dispose();
 			}
+		}
+		if(b==close) {
+			dispose();
 		}
 	}
 	
@@ -148,6 +159,10 @@ public class AddDlg extends GBDialog {
 		testField.setText("");
 		quizField.setText("");
 		hwField.setText("");
+		close.setBackground(Color.red);
+		close.setBorder(BorderFactory.createBevelBorder(0));
+		add.setBorder(BorderFactory.createBevelBorder(0));
+		getContentPane().setBackground(new Color(179,153,212));
 		setTitle("Add Student");
 		setDlgCloseIndicator("Cancel");
 		setSize(400, 500);

@@ -2,6 +2,7 @@ package main;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -26,16 +27,27 @@ public class gradeUI extends GBFrame {
 	
 	JTextArea stats = addTextArea("",2,2,1,1);
 	
+	JMenuBar menuBar = new JMenuBar();
+	
 	public gradeUI() {
 		stats.setEditable(false);
 		display();
+		dataTable.setFillsViewportHeight(true);
+		stats.setBackground(new Color(179,153,212));
+		stats.setFont(new Font("Serif",Font.BOLD,17));
+		add.setBackground(new Color(179,153,212));
+		sortGrade.setBackground(new Color(179,153,212));
+		sortName.setBackground(new Color(179,153,212));
+		populate.setBackground(Color.red);
 	}
 	
 	public void menuItemSelected(JMenuItem menuItem) {
 		if (menuItem == add) {
 			AddDlg dlg = new AddDlg(this,students);
 			dlg.setVisible(true);
-			displayStudents(students.sortGrades());
+			if(students.students.size()>0) {
+				displayStudents(students.sortGrades());
+			}
 		}
 		if(menuItem == populate) {
 			try {
